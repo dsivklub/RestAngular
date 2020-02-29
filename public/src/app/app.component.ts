@@ -18,13 +18,17 @@ interface StudentsGroupFromBack {
   styleUrls: ["./app.component.less"]
 })
 export class AppComponent {
+  students: Array<Student> = [];
   constructor(private BackService: BackendService) {}
 
   getStudentFromBack() {
     this.BackService.getStudentsFromBack().subscribe(
       (students: StudentsGroupFromBack) => {
-        console.log(students.id);
+        for (let i = 0 ; i < students.students.length ; i++) {
+        this.students.push(students.students[i]);
+        }
         console.log(students.students);
+        console.log(this.students);
       }
     );
   }
