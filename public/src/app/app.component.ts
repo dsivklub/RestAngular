@@ -1,15 +1,17 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { BackendService } from "./backend.service";
 
-interface Student {
+interface User {
   name: string;
   surname: string;
-  assessment: number;
+  email: string;
+  nickname: string;
+  passw: string;
 }
 
-interface StudentsGroupFromBack {
+interface UsersGroupFromBack {
   id: number;
-  students: Array<Student>;
+  user: User;
 }
 
 @Component({
@@ -17,18 +19,28 @@ interface StudentsGroupFromBack {
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.less"]
 })
-export class AppComponent {
-  students: Array<Student> = [];
+export class AppComponent implements OnInit {
+  users: Array<User> = [];
+  user: User ={
+    name: "name",
+    surname: "surname",
+    email: "email",
+    nickname: "nickname",
+    passw: "passw"
+  }
   constructor(private BackService: BackendService) {}
-
+  ngOnInit(){
+    this.BackService.setUser(this.user);
+  }
   getStudentFromBack() {
-    this.BackService.getStudentsFromBack().subscribe(
-      (students: StudentsGroupFromBack) => {
-        for (let i = 0 ; i < students.students.length ; i++) {
-        this.students.push(students.students[i]);
+    this.BackService.getUsersFromBack().subscribe(
+      (users: Array<UsersGroupFromBack>) => {
+        for (let i = 0 ; i < users.length ; i++) {
+        this.users.push(users[i].user);
         }
-        console.log(students.students);
-        console.log(this.students);
+
+        console.log(users);
+        // console.log(this.users);
       }
     );
   }
