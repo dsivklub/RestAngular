@@ -1,0 +1,44 @@
+<link
+href="https://fonts.googleapis.com/css?family=Lato&display=swap"
+rel="stylesheet"
+/>
+<form [formGroup]="registrationControl">
+  <div class="registrationUser">
+    <p class = 'akk'>Создайте аккаунт PhotoGallery</p>
+   <!---<img src="assets/foto.png" class = 'logo' alt="logo"> -->
+    <div class="namePerson">
+      <!--<div id = 'name'>Имя</div>-->
+      <input type="text" placeholder="Имя" id = 'firstName' class= "inputs" formControlName="name" />
+      <input type="text" placeholder="Фамилия" id = 'secondName' class= "inputs" formControlName="surname"  />
+    </div>
+    <div class="mail">
+      <input type="text" placeholder="Ваш email" class= "inputs1" formControlName="mail" />
+    </div>
+    <div class = "informationAboutUser">
+    <input type="text" id = 'mailform' placeholder="Ваш никнейм" class="inputs" formControlName="nickname" />
+    <input type="password" id = 'passwordform' placeholder = "Ваш пароль" class="inputs" formControlName="password"/>
+  </div>
+  <button class = "button" id = 'buttonReg' (click)="registrationUser()">Далее</button>
+  <button class = "button" id = 'buttonOn' routerLink = "/authorization">Войти</button>
+
+  <img src="assets/logo.png" class = "logo" alt="asdsad">
+  <div class="motto">PhotoGallery - место для ваших фотосессий</div>
+  </div>
+</form>
+
+
+<div class="popup" [ngClass]="{
+  'popup': !popupVisionError,
+  'vision_on': popupVisionError
+  }">
+  <div class = "popup-content" id = 'popupError'>
+  <div class="popup-header" id = 'popupErrorHeader'>
+    <h3>Ошибка</h3>
+    <span class = "close" (click)="invertPopupError()">&times;</span>
+  </div>
+            <div class="popup-body">
+        <div>
+        <div *ngIf = "!registrationControl.valid">
+            {{registrationControl.errors.GroupAddValidator.error1}}
+        </div>
+      </div>

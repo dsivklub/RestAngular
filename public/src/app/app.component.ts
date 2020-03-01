@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { BackendService } from "./backend.service";
+import { BackendService } from "./service/backend.service";
 
 interface User {
   name: string;
@@ -22,11 +22,11 @@ interface UsersGroupFromBack {
 export class AppComponent implements OnInit {
   users: Array<User> = [];
   user: User ={
-    name: "name",
-    surname: "surname",
-    email: "email",
-    nickname: "nickname",
-    passw: "passw"
+    name: 'name',
+    surname: 'surname',
+    email: 'email',
+    nickname: 'nickname',
+    passw: 'passw'
   }
   constructor(private BackService: BackendService) {}
   ngOnInit(){

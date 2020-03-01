@@ -1,0 +1,18 @@
+<link
+href="https://fonts.googleapis.com/css?family=Lato&display=swap"
+rel="stylesheet"
+/>
+<form [formGroup]="authorizationControl">
+  <div class="registrationUser">
+    <p class = 'akk'>Войдите в аккаунт PhotoGallery</p>
+   <!---<img src="assets/foto.png" class = 'logo' alt="logo"> -->
+    <div class = "informationAboutUser">
+    <input type="text" id = 'mailform' placeholder="Ваш никнейм" class="inputs" formControlName="nickname" />
+    <input type="password" id = 'passwordform' placeholder = "Ваш пароль" class="inputs" formControlName="passw"/>
+  </div>
+    <button class = "button" id = 'buttonReg' routerLink = "/registration">Реистрация</button>
+    <button class = "button" id = 'buttonOn' (click)="authorizationUser()" routerLink = "/home">Войти</button>
+  <img src="assets/logo.png" class = "logo" alt="logo">
+  <!--<div class="motto">PhotoGallery - место для ваших фотосессий</div>  -->
+  </div>
+</form>

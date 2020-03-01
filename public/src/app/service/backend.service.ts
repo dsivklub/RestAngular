@@ -15,10 +15,10 @@ interface User {
 export class BackendService {
 
   constructor(private http: HttpClient) { }
-  const url = "http://localhost:8080/users";
+  // const url = "http://localhost:8080/users";
   getUsersFromBack() {
 
-    return this.http.get(this.url);
+    return this.http.get("http://localhost:8080/users");
   }
   setUser(user: User) {
     const body = {
@@ -28,7 +28,7 @@ export class BackendService {
       nickname: user.nickname,
       passw: user.passw
     };
-    this.http.post(this.url, body);
+    this.http.post("http://localhost:8080/users", body);
     console.log("Отправили", body);
   }
 }

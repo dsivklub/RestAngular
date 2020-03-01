@@ -5,20 +5,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.ToString;
 
 @Entity
 @Table
+@ToString(of = {"id" , "name" , "surname" ,  "email", "nickname" , "passw"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
+    private Long id;
     private String name;
     private String surname;
     private String email;
     private String nickname;
     private String passw;
 
+    public void setId(String id){
+        this.id = id;
+    }
+
+    public Long getid() {
+        return this.id;
+    }
     public void setName(String name){
         this.name = name;
     }
