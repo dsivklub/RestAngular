@@ -1,0 +1,176 @@
+.column {
+  position: absolute;
+  height: 100%;
+  width: 5%;
+  background-color: #ff8562;
+  left: -5px;
+  top: 0px;
+  border-radius: 0 12px 12px 0;
+  z-index: 2;
+}
+.menu-icon {
+  position: relative;
+  top: 40%;
+  left: 11%;
+  width: 30px;
+  height: 2px;
+  background-color: #fff;
+}
+.menu-icon::before {
+  position: absolute;
+  left: 0;
+  top: -10px;
+  content: "";
+  display: block;
+  width: 30px;
+  height: 2px;
+  background-color: #fff;
+  transition: 0.2s;
+}
+.menu-icon::after {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  content: "";
+  display: block;
+  width: 30px;
+  height: 2px;
+  background-color: #fff;
+  transition: 0.2s;
+}
+.visual-area {
+  position: relative;
+  top: 1%;
+  left: 20%;
+  height: 49px;
+  width: 100%;
+}
+.visual-area:hover {
+  cursor: pointer;
+}
+/*
+.visual-area:hover > .menu-icon {
+  background-color: transparent;
+}
+.visual-area:hover > .menu-icon::after {
+  transform: rotate(-45deg);
+  top: 0;
+}
+.visual-area:hover > .menu-icon::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+*/
+.text {
+  color: #fff;
+  position: relative;
+  top: 75%;
+  right: 62px;
+  transform: rotate(-90deg);
+  height: 10px;
+  width: 170px;
+  font-size: 20px;
+  font-family: "Lato", sans-serif;
+}
+.information {
+  position: absolute;
+  height: 100%;
+  width: 5%;
+  left: -7px;
+  top: 0px;
+  background-color: #fff;
+  border: 1px solid grey;
+  border-radius: 0 12px 12px 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: 0.5s;
+}
+.icon {
+  position: relative;
+  height: 7%;
+  width: 65%;
+  left: 17%;
+  margin-top: 15px;
+  cursor: pointer;
+}
+.header {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  top: 45%;
+  left: 38%;
+  font-size: 55px;
+  font-family: "Lato", sans-serif;
+}
+#icon {
+  position: relative;
+  height: 85px;
+  right: 30px;
+  top: 45px;
+}
+.motto {
+  position: absolute;
+  left: 39%;
+  top: 35%;
+  font-family: "Lato", sans-serif;
+  font-size: 17px;
+  color: #ff8562;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.vision_on{
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  margin-left: auto;
+}
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.popup-header {
+  background-color: #5c82b8;
+  color: white;
+  display: flex;
+  padding: 2px 16px;
+}
+
+.popup-body {
+  padding: 20px 16px;
+  font-family: sans-serif;
+}
+.popup-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+

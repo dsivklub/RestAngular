@@ -1,1 +1,68 @@
-<p>Hello, {{user.name}} {{user.surname}}, your nick is {{user.nickname}}</p>
+<!--<p>Hello, {{user.name}} {{user.surname}}, your nick is {{user.nickname}}</p> -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Project</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  </head>
+  <body>
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato&display=swap"
+      rel="stylesheet"
+    />
+    <div class="menu">
+      <div class="column">
+        <div class="visual-area" (click)="translate()">
+          <div class="menu-icon"></div>
+        </div>
+        <div class="text">
+          <span>Вход в систему</span>
+        </div>
+      </div>
+      <div class="information">
+        <img
+          class="icon"
+          src="assets/registration.png"
+          routerLink="/registration"
+          alt=""
+        />
+        <img
+          class="icon"
+          src="assets/login.png"
+          routerLink="/authorization"
+          alt=""
+        />
+        <img class="icon" src="assets/info.png" alt="" />
+      </div>
+    </div>
+    <div class="motto">
+      <span>Место, где можно разместить ваши фотографии</span>
+    </div>
+    <div class="header">
+      <img id="icon" src="assets/logo.png" alt="" />
+      <p>Photo gallery</p>
+    </div>
+<!----
+    <div
+      class="popup"
+      [ngClass]="{
+        popup: !popupVisionError,
+        vision_on: popupVisionError
+      }"
+    >
+      <div class="popup-content" id="popupError">
+        <div class="popup-header" id="popupErrorHeader">
+          <h3>Информация о сайте</h3>
+          <span class="close" >&times;</span>
+        </div>
+        <div class="popup-body">
+          <div></div>
+        </div>
+      </div>
+    </div>
+  -->
+  </body>
+</html>

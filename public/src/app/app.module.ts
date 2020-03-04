@@ -10,12 +10,13 @@ import { AuthorizationComponent } from './authorization/authorization.component'
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { HomepageComponent } from './homepage/homepage.component';
+import { UserPageComponent } from './user-page/user-page.component';
 
 const routes = [
-  {path: "" , component: AppComponent } ,
+  {path: "" , component: HomepageComponent } ,
   {path: "registration" , component: RegistrationComponent},
   {path: "authorization", component: AuthorizationComponent},
-  {path: "home" , component: HomepageComponent}
+  {path: "userpage" , component:UserPageComponent}
 ]
 
 @NgModule({
@@ -23,7 +24,8 @@ const routes = [
     AppComponent,
     RegistrationComponent,
     AuthorizationComponent,
-    HomepageComponent
+    HomepageComponent,
+    UserPageComponent
   ],
   imports: [
     BrowserModule,

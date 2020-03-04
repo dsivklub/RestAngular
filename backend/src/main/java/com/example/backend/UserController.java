@@ -82,7 +82,7 @@ public class UserController<T> {
      * .filter(user -> ((List<Map<String, T>>) user.get("users")).get(1)
      * .equals(nickname)) .findFirst() .orElseThrow(NotFoundException::new); }
      */
-
+    
     @PostMapping
     public User create(@RequestBody User user) {
         return userRepo.save(user);

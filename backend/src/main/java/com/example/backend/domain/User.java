@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import lombok.ToString;
 
 @Entity
-@Table
+@Table(name = "customers")
 @ToString(of = {"id" , "name" , "surname" ,  "email", "nickname" , "passw"})
 public class User {
     @Id
@@ -20,7 +20,7 @@ public class User {
     private String nickname;
     private String passw;
 
-    public void setId(String id){
+    public void setId(Long id) {
         this.id = id;
     }
 

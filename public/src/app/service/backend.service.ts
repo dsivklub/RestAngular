@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 interface User {
+  id: string;
   name: string;
   surname: string;
   email: string;
   nickname: string;
   passw: string;
 }
-
+interface UsersGroupFromBack {
+  id: number;
+  user: User;
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -20,15 +24,15 @@ export class BackendService {
 
     return this.http.get("http://localhost:8080/users");
   }
-  setUser(user: User) {
+  setUser(user: UsersGroupFromBack) {
     const body = {
-      name: user.name,
-      surname: user.surname,
-      email: user.email,
-      nickname: user.nickname,
-      passw: user.passw
+      name: user.user.name,
+      surname: user.user.surname,
+      email: user.user.email,
+      nickname: user.user.nickname,
+      passw: user.user.passw
     };
-    this.http.post("http://localhost:8080/users", body);
     console.log("Отправили", body);
+    return this.http.post("http://localhost:8080/users", body);
   }
 }

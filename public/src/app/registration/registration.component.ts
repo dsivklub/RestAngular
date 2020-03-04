@@ -12,7 +12,6 @@ export class RegistrationComponent implements OnInit {
 
   popupVisionError = false;
   registrationControl: FormGroup;
-  check: Array<boolean> = [false , false , false , false , false];
   Users: Array<User> = [];
   invertPopupError(): void {
     this.popupVisionError = !this.popupVisionError;
@@ -32,19 +31,6 @@ export class RegistrationComponent implements OnInit {
     this.Users.push(newUser);
     this.registrationControl.reset();
     console.log(this.Users);
-    // this.backend.getUserFromFront(this.Users);
-    //this.backend.setBack(newUser);
-    //this.backend.getFromBack().subscribe((students: Array<User>) => {
-    //  for( let i = 0 ; i < students.length ; i++) {
-   //   console.log(students[i]);
-   //   console.log('bil tyt');
-   //   if(newUser.name === students[i].name && newUser.surname === students[i].surname){
-   //     console.log("Сошлись");
-   //   } else {
-    //    console.log("Не сошлись");
-   //   }
-    //  }
-   // })
   } else {
     this.invertPopupError();
   }
