@@ -11,8 +11,29 @@ rel="stylesheet"
     <input type="password" id = 'passwordform' placeholder = "Ваш пароль" class="inputs" formControlName="passw"/>
   </div>
     <button class = "button" id = 'buttonReg' routerLink = "/registration">Реистрация</button>
-    <button class = "button" id = 'buttonOn' (click)="authorizationUser()" routerLink = "/home">Войти</button>
+    <button class = "button" id = 'buttonOn' (click)="authorizationUser()" routerLink = "/userpage">Войти</button>
   <img src="assets/logo.png" class = "logo" alt="logo">
   <!--<div class="motto">PhotoGallery - место для ваших фотосессий</div>  -->
   </div>
 </form>
+<div
+class="popup"
+[ngClass]="{
+  popup: !popupVisionError,
+  vision_on: popupVisionError
+}"
+>
+<div class="popup-content" id="popupError">
+  <div class="popup-header" id="popupErrorHeader">
+    <h3>Ошибка</h3>
+    <span class="close" (click)="invertErrorVision()">&times;</span>
+  </div>
+  <div class="popup-body">
+    <div>
+      <ng-container *ngFor = "let error of errors; let i = index">
+        {{error}} <br>
+      </ng-container>
+    </div>
+  </div>
+</div>
+</div>

@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
   };
   constructor(private BackService: BackendService) {}
   ngOnInit(){
-    this.BackService.setUser(this.userPost).subscribe()
+
   }
   getStudentFromBack() {
     this.BackService.getUsersFromBack().subscribe(

@@ -8,11 +8,11 @@ import javax.persistence.Table;
 import lombok.ToString;
 
 @Entity
-@Table(name = "customers")
-@ToString(of = {"id" , "name" , "surname" ,  "email", "nickname" , "passw"})
+@Table(name = "users")
+// @ToString(of = {"id" , "name" , "surname" ,  "email", "nickname" , "passw"})
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String surname;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators, FormArray, ValidationErrors} from '@angular/forms';
 import {User , UsersGroupFromBack} from '../api';
-// import { BackendService } from './backend.service';
+import { BackendService } from '../service/backend.service';
 
 @Component({
   selector: 'app-registration',
@@ -13,6 +13,7 @@ export class RegistrationComponent implements OnInit {
   popupVisionError = false;
   registrationControl: FormGroup;
   Users: Array<User> = [];
+  BackService: any;
   invertPopupError(): void {
     this.popupVisionError = !this.popupVisionError;
   }
@@ -29,19 +30,20 @@ export class RegistrationComponent implements OnInit {
       passw: userPassword
     };
     this.Users.push(newUser);
+    this.backService.setUser(newUser).subscribe();
     this.registrationControl.reset();
     console.log(this.Users);
   } else {
     this.invertPopupError();
   }
  }
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private backService: BackendService) {
     this.registrationControl = this.formBuilder.group({
       name : ['' , [Validators.required]] ,
       surname : ['', [Validators.required]],
       nickname : ['' , [Validators.required]],
       mail : ['' , [Validators.required , Validators.email]],
-      password: ['' , [Validators.required]]
+      password: ['' , [Validators.required, Validators.minLength(6)]]
     }, {validator: GroupAddValidator});
   }
   ngOnInit() {

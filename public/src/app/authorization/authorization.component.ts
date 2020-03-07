@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { BackendService } from "../service/backend.service";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BackendService } from '../service/backend.service';
 // import {User , UsersGroupFromBack} from '../api';
-import { FrontService } from "../service/front.service";
+import { FrontService } from '../service/front.service';
 
 interface User {
   id: string;
@@ -13,53 +13,68 @@ interface User {
   passw: string;
 }
 
-interface UsersGroupFromBack {
-  id: number;
-  user: User;
-}
-
 @Component({
-  selector: "app-authorization",
-  templateUrl: "./authorization.component.html",
-  styleUrls: ["./authorization.component.less"]
+  selector: 'app-authorization',
+  templateUrl: './authorization.component.html',
+  styleUrls: ['./authorization.component.less']
 })
 export class AuthorizationComponent implements OnInit {
+  popupVisionError = false;
   errors: Array<string> = [];
-  nextPage: boolean = false;
+  nextPage = false;
   authorizationControl: FormGroup;
   users: Array<User> = [];
   userOnSite: User;
+  userFind = false;
+  passwTrue = false;
+  idUserFind: number;
   authorizationUser() {
     if (this.authorizationControl.valid) {
+      this.errors = [];
       const nickname = this.authorizationControl.controls.nickname.value;
       const passw = this.authorizationControl.controls.passw.value;
       for (let i = 0; i < this.users.length; i++) {
         if (nickname === this.users[i].nickname) {
-          if (passw === this.users[i].passw) {
-            const newUser: User = {
-              id: this.users[i].id,
-              name: this.users[i].name,
-              surname: this.users[i].surname,
-              email: this.users[i].email,
-              nickname: this.users[i].nickname,
-              passw: this.users[i].passw
-            };
-            this.userOnSite = newUser;
-            this.FrontService.setAuthorizationUser(newUser);
-            this.nextPage = true;
-            this.authorizationControl.reset();
-            break;
-          }
-          } else {
-            this.errors.push("Пользователь с данным логином не существует");
-            break;
-          }
-          this.errors.push("Введён неверный пароль пользователя");
-
+          this.userFind = true;
+          this.idUserFind = i;
+          break;
+        }
+      }
+      if(this.userFind) {
+      if (passw === this.users[this.idUserFind].passw) {
+        this.passwTrue = true;
+        this.FrontService.setAutorizate();
+        const newUser: User = {
+          id: this.users[this.idUserFind].id,
+          name: this.users[this.idUserFind].name,
+          surname: this.users[this.idUserFind].surname,
+          email: this.users[this.idUserFind].email,
+          nickname: this.users[this.idUserFind].nickname,
+          passw: this.users[this.idUserFind].passw
+        };
+        this.userOnSite = newUser;
+        this.FrontService.setAuthorizationUser(newUser);
+        this.nextPage = true;
+        this.authorizationControl.reset();
+      }
+    }
+      if (!this.userFind) {
+        this.popupVisionError = true;
+        this.errors.push("Пользователь с данным логином не существует");
+        this.authorizationControl.reset();
+      }
+      if (!this.passwTrue && this.userFind) {
+        this.popupVisionError = true;
+        this.errors.push("Введён неверный пароль пользователя");
+        this.authorizationControl.controls.passw.reset();
       }
       console.log("Ваш пользователь", this.userOnSite);
       console.log(this.errors);
     }
+  }
+
+  invertErrorVision() {
+    this.popupVisionError = !this.popupVisionError;
   }
 
   constructor(

@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.example.backend.domain.Image;
 import com.example.backend.domain.User;
 import com.example.backend.exception.NotFoundException;
+import com.example.backend.repo.ImageRepo;
 import com.example.backend.repo.UserRepo;
 
 import org.springframework.beans.BeanUtils;
@@ -23,25 +25,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("image")
 @CrossOrigin(origins = "http://localhost:4200")
-public class UserController {
-    private final UserRepo userRepo;
+public class ImageController {
+    private final ImageRepo imageRepo;
 
     @Autowired
-    public UserController(UserRepo userRepo) {
-        this.userRepo = userRepo;
+    public ImageController(ImageRepo imageRepo) {
+        this.imageRepo = imageRepo;
     }
 
-
     @GetMapping
-    public List<User> greeting() {
-        return userRepo.findAll();
+    public List<Image> greeting() {
+        return imageRepo.findAll();
     }
 
     @GetMapping("{id}")
-    public User getUserById(@PathVariable("id") User user) {
-        return user;
+    public Image getUserById(@PathVariable("id") Image image) {
+        return image;
     }
 
     /*
@@ -52,20 +53,20 @@ public class UserController {
      */
 
     @PostMapping
-    public User create(@RequestBody User user) {
-        return userRepo.save(user);
+    public Image create(@RequestBody Image image) {
+        return imageRepo.save(image);
     }
 
     @PutMapping("{id}")
-    public User update(
-        @PathVariable("id") User userFromDb, 
-        @RequestBody User user) {
-        BeanUtils.copyProperties(user, userFromDb, "id");
-        return userRepo.save(user);
+    public Image update(
+        @PathVariable("id") Image imageFromDb, 
+        @RequestBody Image image) {
+        BeanUtils.copyProperties(image, imageFromDb, "id");
+        return imageRepo.save(image);
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable("id") User user) {
-        userRepo.delete(user);
+    public void delete(@PathVariable("id") Image image) {
+        imageRepo.delete(image);
     }
 }

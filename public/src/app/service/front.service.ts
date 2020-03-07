@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class FrontService {
+  autorizate: boolean;
   user: User;
   constructor(private http: HttpClient) { }
   setAuthorizationUser(user: User) {
@@ -12,5 +13,11 @@ export class FrontService {
   }
   getAuthorizationUser() {
     return this.user;
+  }
+  setAutorizate() {
+    this.autorizate = true;
+  }
+  getAutorizate() {
+    return this.autorizate;
   }
 }

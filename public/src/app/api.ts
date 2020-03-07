@@ -10,3 +10,9 @@ export interface UsersGroupFromBack {
   id: number;
   user: User;
 }
+
+export interface ImageBack {
+  id_foto: string;
+  src: string;
+  id: string;
+}

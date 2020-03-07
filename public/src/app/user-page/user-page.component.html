@@ -1,1 +1,98 @@
-<p>user-page works!</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Project</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  </head>
+  <body>
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato&display=swap"
+      rel="stylesheet"
+    />
+    <div class="menu">
+      <div class="column">
+        <div class="visual-area" (click)="translate()">
+          <div class="menu-icon"></div>
+        </div>
+        <div class="text">
+          <span>Навигация</span>
+        </div>
+      </div>
+      <div class="information">
+        <img
+          class="icon"
+          src="assets/profil.png"
+          alt=""
+        />
+        <img
+          class="icon"
+          src="assets/userFoto.png"
+          alt=""
+        />
+        <img class="icon" src="assets/info.png" alt="" />
+      </div>
+    </div>
+    <div class="header">
+      <img id="icon" src="assets/logo.png" alt="" />
+      <p>Photo gallery</p>
+    </div>
+    <!----
+    <div class="images">
+        <img class="imageUser" src="assets/fotoProject/foto1.jpg" alt="" />
+        <img src="assets/like.png" alt="" class="like">
+      <img class="imageUser" src="assets/fotoProject/foto2.jpg" alt="" />
+      <img class="imageUser" src="assets/fotoProject/foto3.jpg" alt="" />
+      <img class="imageUser" src="assets/fotoProject/foto4.jpg" alt="" />
+      <img class="imageUser" src="assets/fotoProject/foto5.jpg" alt="" />
+    </div>
+  -->
+
+  <div class="images"  >
+
+  <!---  <div class="image">
+      <img  class="imageUser" src="assets/fotoProject/foto1.jpg" (click)="enlargedImages($event)" alt="" />
+      <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
+    </div>
+    <div class="image">
+      <img class="imageUser" src="assets/fotoProject/foto2.jpg" (click)="enlargedImages($event)"  alt="" />
+      <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
+    </div>
+    <div class="image">
+      <img class="imageUser" src="assets/fotoProject/foto3.jpg" (click)="enlargedImages($event)" alt="" />
+      <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
+    </div>
+    <div class="image">
+      <img class="imageUser" src="assets/fotoProject/foto4.jpg" (click)="enlargedImages($event)" alt="" />
+      <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
+    </div>
+    <div class="image">
+      <img class="imageUser" src="assets/fotoProject/foto5.jpg" (click)="enlargedImages($event)" alt="" />
+      <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
+    </div> -->
+    <ng-container *ngFor = "let image of imageBack;let i = index">
+    <div class="image">
+      <img  class="imageUser" [src] = 'image.src' (click) = "enlargedImages($event)" alt="" />
+      <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
+    </div>
+  </ng-container>
+  </div>
+
+    <div
+      [ngClass]="{
+        popup: !enlargeVision,
+        vision_on: enlargeVision
+      }"
+    >
+      <div class="popup-content">
+          <span class="close" (click)="invertEnlargeVision()">&times;</span>
+        <div class="popup-body">
+          <div>
+            <img class = "enrlargedImage" [src]="enrlargedImage" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+
