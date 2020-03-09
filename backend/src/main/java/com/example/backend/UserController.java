@@ -24,7 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("users")
-@CrossOrigin(origins = "http://localhost:4200")
+// @CrossOrigin(origins = "http://localhost:4200")
+//  @CrossOrigin(origins = "http://localhost:4200/userpage/yourPage")
 public class UserController {
     private final UserRepo userRepo;
 
@@ -55,7 +56,7 @@ public class UserController {
     public User create(@RequestBody User user) {
         return userRepo.save(user);
     }
-
+    
     @PutMapping("{id}")
     public User update(
         @PathVariable("id") User userFromDb, 

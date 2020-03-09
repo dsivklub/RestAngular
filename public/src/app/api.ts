@@ -16,3 +16,8 @@ export interface ImageBack {
   src: string;
   id: string;
 }
+
+export interface UserLikes {
+  id: string;
+  likes: Array<number>;
+}

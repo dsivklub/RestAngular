@@ -60,15 +60,16 @@ export class AuthorizationComponent implements OnInit {
     }
       if (!this.userFind) {
         this.popupVisionError = true;
-        this.errors.push("Пользователь с данным логином не существует");
+        this.errors.push('Пользователь с данным логином не существует');
         this.authorizationControl.reset();
       }
       if (!this.passwTrue && this.userFind) {
         this.popupVisionError = true;
-        this.errors.push("Введён неверный пароль пользователя");
+        this.errors.push('Введён неверный пароль пользователя');
         this.authorizationControl.controls.passw.reset();
       }
-      console.log("Ваш пользователь", this.userOnSite);
+      console.log('Ваш пользователь', this.userOnSite);
+      this.FrontService.setAuthorizationUser(this.userOnSite);
       console.log(this.errors);
     }
   }
@@ -83,8 +84,8 @@ export class AuthorizationComponent implements OnInit {
     private FrontService: FrontService
   ) {
     this.authorizationControl = this.formBuilder.group({
-      nickname: ["", [Validators.required]],
-      passw: ["", [Validators.required]]
+      nickname: ['', [Validators.required]],
+      passw: ['', [Validators.required]]
     });
   }
 

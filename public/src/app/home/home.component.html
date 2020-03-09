@@ -1,0 +1,49 @@
+<div class="images"  >
+  <!---  <div class="image">
+      <img  class="imageUser" src="assets/fotoProject/foto1.jpg" (click)="enlargedImages($event)" alt="" />
+      <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
+    </div>
+    <div class="image">
+      <img class="imageUser" src="assets/fotoProject/foto2.jpg" (click)="enlargedImages($event)"  alt="" />
+      <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
+    </div>
+    <div class="image">
+      <img class="imageUser" src="assets/fotoProject/foto3.jpg" (click)="enlargedImages($event)" alt="" />
+      <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
+    </div>
+    <div class="image">
+      <img class="imageUser" src="assets/fotoProject/foto4.jpg" (click)="enlargedImages($event)" alt="" />
+      <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
+    </div>
+    <div class="image">
+      <img class="imageUser" src="assets/fotoProject/foto5.jpg" (click)="enlargedImages($event)" alt="" />
+      <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
+    </div> -->
+    <ng-container *ngFor = "let image of imageBack;let i = index">
+    <div class="image">
+      <img  class="imageUser" [src] = 'image.src' (click) = "enlargedImages($event)" alt="" />
+      <ng-container *ngIf = "imageLikeAuthorizateUser[i] === 0">
+        <img class="like" (click)="like($event , i)" src="assets/like.png" alt="" >
+      </ng-container>
+    <ng-container *ngIf = "imageLikeAuthorizateUser[i] === 1">
+      <img class="like" (click)="like($event , i)" src="assets/likeKr.png" alt="" >
+    </ng-container>
+    </div>
+  </ng-container>
+  </div>
+
+    <div
+      [ngClass]="{
+        popup: !enlargeVision,
+        vision_on: enlargeVision
+      }"
+    >
+      <div class="popup-content">
+          <span class="close" (click)="invertEnlargeVision()">&times;</span>
+        <div class="popup-body">
+          <div>
+            <img class = "enrlargedImage" [src]="enrlargedImage" alt="">
+          </div>
+        </div>
+      </div>
+    </div>

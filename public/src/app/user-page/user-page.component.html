@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
+ <head>
     <meta charset="utf-8" />
     <title>Project</title>
-    <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
   </head>
   <body>
     <link
@@ -23,14 +19,20 @@
       </div>
       <div class="information">
         <img
+        class="icon"
+        src="assets/home.png"
+        alt="" routerLink = "home"
+      />
+        <img
           class="icon"
           src="assets/profil.png"
-          alt=""
+          alt="" routerLink = "yourPage"
         />
         <img
           class="icon"
           src="assets/userFoto.png"
           alt=""
+          routerLink = "saveImages"
         />
         <img class="icon" src="assets/info.png" alt="" />
       </div>
@@ -39,6 +41,7 @@
       <img id="icon" src="assets/logo.png" alt="" />
       <p>Photo gallery</p>
     </div>
+    <router-outlet></router-outlet>
     <!----
     <div class="images">
         <img class="imageUser" src="assets/fotoProject/foto1.jpg" alt="" />
@@ -49,10 +52,10 @@
       <img class="imageUser" src="assets/fotoProject/foto5.jpg" alt="" />
     </div>
   -->
-
+<!----
   <div class="images"  >
 
-  <!---  <div class="image">
+   <div class="image">
       <img  class="imageUser" src="assets/fotoProject/foto1.jpg" (click)="enlargedImages($event)" alt="" />
       <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
     </div>
@@ -71,11 +74,11 @@
     <div class="image">
       <img class="imageUser" src="assets/fotoProject/foto5.jpg" (click)="enlargedImages($event)" alt="" />
       <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
-    </div> -->
+    </div>
     <ng-container *ngFor = "let image of imageBack;let i = index">
     <div class="image">
       <img  class="imageUser" [src] = 'image.src' (click) = "enlargedImages($event)" alt="" />
-      <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
+      <img class="like" (click)="like($event , i)" src="assets/like.png" alt="" >
     </div>
   </ng-container>
   </div>
@@ -95,4 +98,4 @@
         </div>
       </div>
     </div>
-
+  -->

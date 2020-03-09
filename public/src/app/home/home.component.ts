@@ -1,11 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { FrontService } from "../service/front.service";
-import {   UserLikes } from "../api";
-import { ImageBack } from "../api";
-import { BackendService } from "../service/backend.service";
+import { Component, OnInit } from '@angular/core';
+import { FrontService } from '../service/front.service';
+import {   UserLikes, ImageBack } from '../api';
+import { BackendService } from '../service/backend.service';
 
 interface User {
-  id: string,
+  id: string;
   name: string;
   surname: string;
   email: string;
@@ -14,33 +13,14 @@ interface User {
 }
 
 @Component({
-  selector: "app-user-page",
-  templateUrl: "./user-page.component.html",
-  styleUrls: ["./user-page.component.less"]
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.less']
 })
-export class UserPageComponent {
-  counter = 1;
-  translate() {
-    const visionArea = document.getElementsByClassName(
-      'visual-area'
-    ) as HTMLCollectionOf<HTMLElement>;
-    const information = document.getElementsByClassName(
-      'information'
-    ) as HTMLCollectionOf<HTMLElement>;
-    const icon = document.getElementsByClassName(
-      'menu-icon'
-    ) as HTMLCollectionOf<HTMLElement>;
-    this.counter++;
-    if (this.counter % 2 === 0) {
-      information[0].style.transform = 'translate(65px,0)';
-    } else {
-      information[0].style.transform = 'translate(-65px,0)';
-    }
-  }
-  /*
+export class HomeComponent implements OnInit {
   user: User;
   counter = 1;
-  counterLike = 0; // надо сделать массивом для каждой фотографии
+  counterLike = 1; // надо сделать массивом для каждой фотографии
   enrlargedImage: string;
   enlargeVision = false;
   imageBack: Array<ImageBack> = [];
@@ -49,23 +29,6 @@ export class UserPageComponent {
     private frontService: FrontService,
     private backService: BackendService
   ) {}
-  translate() {
-    const visionArea = document.getElementsByClassName(
-      'visual-area'
-    ) as HTMLCollectionOf<HTMLElement>;
-    const information = document.getElementsByClassName(
-      'information'
-    ) as HTMLCollectionOf<HTMLElement>;
-    const icon = document.getElementsByClassName(
-      'menu-icon'
-    ) as HTMLCollectionOf<HTMLElement>;
-    this.counter++;
-    if (this.counter % 2 === 0) {
-      information[0].style.transform = 'translate(65px,0)';
-    } else {
-      information[0].style.transform = 'translate(-65px,0)';
-    }
-  }
   like($event, n: number) {
     if (this.imageLikeAuthorizateUser[n] === 0) {
       $event.target.src = 'assets/likeKr.png';
@@ -77,6 +40,7 @@ export class UserPageComponent {
       };
       console.log(userLikes);
       this.frontService.setUserLike(userLikes);
+      console.log('!' , this.frontService.getUserLike())
     } else {
       $event.target.src = 'assets/like.png';
       this.imageLikeAuthorizateUser[n] = 0;
@@ -101,13 +65,21 @@ export class UserPageComponent {
   }
   ngOnInit(): void {
     this.user = this.frontService.getAuthorizationUser();
+    this.imageBack = this.frontService.images;
+    if(this.frontService.newImages){
     this.backService.getImage().subscribe((images: Array<ImageBack>) => {
       for (let i = 0; i < images.length; i++) {
         this.imageBack.push(images[i]);
         this.imageLikeAuthorizateUser.push(0);
       }
+      this.frontService.images = this.imageBack;
     });
-    console.log(this.imageBack);
+    this.frontService.setUserImage(this.user.id);
+    console.log(this.frontService.getUserImage());
   }
-  */
+    this.frontService.newImages = false;
+    const like: UserLikes = this.frontService.getUserLike();
+    this.imageLikeAuthorizateUser = like.likes;
+    console.log('!!!!!' , this.imageLikeAuthorizateUser);
+}
 }

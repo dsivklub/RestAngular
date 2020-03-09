@@ -1,0 +1,13 @@
+<!--Тут нужно добавить фотографии, которые лайкнул пользователь -->
+
+<div class="images"  >
+ <ng-container *ngFor = "let image of images; let i = index">
+  <div class="image">
+    <ng-container *ngIf = "imageLikeAuthorizateUser[i] === 1">
+    <img class="imageUser" [src] = 'images[i]'  alt="" />
+    <img class="like"  src="assets/likeKr.png" alt="" >
+  </ng-container>
+  </div>
+</ng-container>
+</div>
+

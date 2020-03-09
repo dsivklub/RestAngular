@@ -1,0 +1,130 @@
+<link
+href="https://fonts.googleapis.com/css?family=Lato&display=swap"
+rel="stylesheet"
+/>
+<div class="userInformation">
+  {{authorizateUser.nickname}}
+  <!--admin-->
+  <img class = "icons" (click)="invertInformationVision()" src="assets/change1.png" alt="">
+</div>
+
+
+<!--Тут нужно добавить вывод фотографий пользователя на сайте -->
+
+<div class="images"  >
+    <ng-container *ngFor = "let image of userImage;let i = index">
+    <div class="image">
+      <img class="imageUser" [src] = 'userImage[i]'  alt="" />
+      <ng-container *ngIf = "imageLikeAuthorizateUser[i] === 0">
+        <img class="like"  src="assets/like.png" alt="" >
+      </ng-container>
+    <ng-container *ngIf = "imageLikeAuthorizateUser[i] === 1">
+      <img class="like"  src="assets/likeKr.png" alt="" >
+    </ng-container>
+    </div>
+  </ng-container>
+  </div>
+<!---
+    <div
+      [ngClass]="{
+        popup: !enlargeVision,
+        vision_on: enlargeVision
+      }"
+    >
+      <div class="popup-content">
+          <span class="close" (click)="invertEnlargeVision()">&times;</span>
+        <div class="popup-body">
+          <div>
+            <img class = "enrlargedImage" [src]="enrlargedImage" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  -->
+
+<!--Попап для изменения информации о пользователе -->
+<div
+[ngClass]="{
+  popup: !informationVision,
+  vision_on: informationVision
+}"
+>
+<div class="popup-content">
+    <span class="close" (click)="invertInformationVision()">&times;</span>
+  <div class="popup-body">
+    <form [formGroup] = "informationUser">
+    <div class="informationUser">
+    <div class = "namePerson">
+      <div class="field">
+      <span class = "placeOn">Имя</span>
+      <input type="text" placeholder="" id = 'firstName' class= "inputs" formControlName="name"  />
+    </div>
+    <div class="field">
+      <span class = "placeOn">Фамилия</span>
+      <input type="text" placeholder="" id = 'firstName' class= "inputs" formControlName="surname"  />
+    </div>
+    </div>
+    <div class="emailPerson">
+      <span class = "placeOnEmail">Email</span>
+      <input type="text" placeholder="" id = 'firstName' class= "inputsEmail" formControlName="mail"  />
+    </div>
+    <div class = "nicknameInformation">
+      <div class="field">
+      <span class = "placeOn">Никнейм</span>
+      <input type="text" placeholder="" id = 'firstName' class= "inputs" formControlName="nickname"  />
+    </div>
+    <div class="field">
+      <span class = "placeOn">Пароль</span>
+      <input type="text" placeholder="" id = 'firstName' class= "inputs" formControlName="password"  />
+    </div>
+    </div>
+  </div>
+</form>
+  </div>
+  <input class = "button" (click)="changeUserInformation()" type="button" value="Изменить">
+  <input type="button" value="Удалить" class = "button" id = "delete" (click)="invertPopupVisionDelete()">
+</div>
+</div>
+
+<!--Попап с ошибкой изменения данных-->
+
+<div class="popupError" [ngClass]="{
+  'popupError': !popupVisionError,
+  'vision_onError': popupVisionError
+  }">
+  <div class = "popup-contentError" id = 'popupError'>
+  <div class="popup-headerError" id = 'popupErrorHeader'>
+    <h3>Ошибка</h3>
+    <span class = "closeError" (click)="invertPopupError()">&times;</span>
+  </div>
+            <div class="popup-bodyError">
+        <div>
+        <div *ngIf = "!informationUser.valid">
+            {{informationUser.errors.GroupAddValidator.error1}}
+        </div>
+      </div>
+      </div>
+      </div>
+      </div>
+
+  <!--Сделать попап для удаления пользователя-->
+<!----
+  <div class="popupDelete" [ngClass]="{
+    'popupDelete': !popupVisionDelete,
+    'vision_onDelete': popupVisionDelete
+    }">
+    <div class = "popup-contentDelete" id = 'popupDelete'>
+    <div class="popup-headerDelete" id = 'popupDelete'>
+      <h3>Ошибка</h3>
+      <span class = "closeDelete" (click)="invertPopupVisionDelete()">&times;</span>
+    </div>
+              <div class="popup-bodyDelete">
+          <div>
+          <span>Вы действительно хотите удалить профиль?</span>
+          <button class = "button">Да</button>
+          <button class = "button">Нет</button>
+        </div>
+        </div>
+        </div>
+        </div>
+      -->
