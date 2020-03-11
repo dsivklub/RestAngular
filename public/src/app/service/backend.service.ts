@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../api';
-import { FrontService } from './front.service';
-import { summaryFileName } from '@angular/compiler/src/aot/util';
+import { User, UserLikes, UserLikeFromBack, ImageBackLikes } from '../api';
+
 
 interface UserFromBack {
   id: string,
@@ -17,7 +16,7 @@ interface UserFromBack {
   providedIn: 'root'
 })
 export class BackendService {
-  frontService: any;
+
   constructor(private http: HttpClient) {}
   // const url = "http://localhost:8080/users";
   getUsersFromBack() {
@@ -46,5 +45,18 @@ export class BackendService {
     const id = body.id;
     const url = 'http://localhost:8080/users/' + id;
     this.http.delete(url).subscribe();
+  }
+  getUserLikes() {
+    return this.http.get('http://localhost:8080/saveImages');
+  }
+  setUserLikes(body: UserLikeFromBack) {
+    return this.http.post('http://localhost:8080/saveImages' , body).subscribe();
+  }
+  getInformationAboutImageLikes() {
+    return this.http.get('http://localhost:8080/imagelikes');
+  }
+  setInformationAboutImageLikes(body: ImageBackLikes) {
+    let id = body.idFoto;
+    return this.http.put('http://localhost:8080/imagelikes' + '/' + id , body).subscribe();
   }
 }

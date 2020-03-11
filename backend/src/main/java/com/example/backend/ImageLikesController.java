@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import com.example.backend.domain.User;
-import com.example.backend.exception.NotFoundException;
-import com.example.backend.repo.UserRepo;
+import com.example.backend.domain.Image;
+import com.example.backend.domain.ImageLikes;
+import com.example.backend.repo.ImageLikesRepo;
+import com.example.backend.repo.ImageRepo;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,26 +24,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("imagelikes")
 @CrossOrigin(origins = "http://localhost:4200")
-//  @CrossOrigin(origins = "http://localhost:4200/userpage/yourPage")
-public class UserController {
-    private final UserRepo userRepo;
+public class ImageLikesController {
+    private final ImageLikesRepo imageLikesRepo;
 
     @Autowired
-    public UserController(UserRepo userRepo) {
-        this.userRepo = userRepo;
+    public ImageLikesController(ImageLikesRepo imageLikesRepo) {
+        this.imageLikesRepo = imageLikesRepo;
     }
 
-
     @GetMapping
-    public List<User> greeting() {
-        return userRepo.findAll();
+    public List<ImageLikes> greeting() {
+        return imageLikesRepo.findAll();
     }
 
     @GetMapping("{id}")
-    public User getUserById(@PathVariable("id") User user) {
-        return user;
+    public ImageLikes getUserById(@PathVariable("id") ImageLikes imageLikes) {
+        return imageLikes;
     }
 
     /*
@@ -53,20 +52,20 @@ public class UserController {
      */
 
     @PostMapping
-    public User create(@RequestBody User user) {
-        return userRepo.save(user);
+    public ImageLikes create(@RequestBody ImageLikes imageLikes) {
+        return imageLikesRepo.save(imageLikes);
     }
-    
+
     @PutMapping("{id}")
-    public User update(
-        @PathVariable("id") User userFromDb, 
-        @RequestBody User user) {
-        BeanUtils.copyProperties(user, userFromDb, "id");
-        return userRepo.save(user);
+    public ImageLikes update(
+        @PathVariable("id") ImageLikes imageLikesFromDb, 
+        @RequestBody ImageLikes imageLikes) {
+        BeanUtils.copyProperties(imageLikes, imageLikesFromDb, "id");
+        return imageLikesRepo.save(imageLikes);
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable("id") User user) {
-        userRepo.delete(user);
+    public void delete(@PathVariable("id") ImageLikes imageLikes) {
+        imageLikesRepo.delete(imageLikes);
     }
 }

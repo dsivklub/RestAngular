@@ -12,7 +12,7 @@ export class RegistrationComponent implements OnInit {
 
   popupVisionError = false;
   registrationControl: FormGroup;
-  Users: Array<User> = [];
+  users: Array<User> = [];
   BackService: any;
   invertPopupError(): void {
     this.popupVisionError = !this.popupVisionError;
@@ -29,10 +29,10 @@ export class RegistrationComponent implements OnInit {
       name: userName , surname: userSurname , email: userMail ,  nickname: userNickname ,
       passw: userPassword
     };
-    this.Users.push(newUser);
+    this.users.push(newUser);
     this.backService.setUser(newUser).subscribe();
     this.registrationControl.reset();
-    console.log(this.Users);
+    console.log(this.users);
   } else {
     this.invertPopupError();
   }

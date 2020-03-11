@@ -43,7 +43,7 @@ export class AuthorizationComponent implements OnInit {
       if(this.userFind) {
       if (passw === this.users[this.idUserFind].passw) {
         this.passwTrue = true;
-        this.FrontService.setAutorizate();
+        this.frontService.setAutorizate();
         const newUser: User = {
           id: this.users[this.idUserFind].id,
           name: this.users[this.idUserFind].name,
@@ -53,7 +53,7 @@ export class AuthorizationComponent implements OnInit {
           passw: this.users[this.idUserFind].passw
         };
         this.userOnSite = newUser;
-        this.FrontService.setAuthorizationUser(newUser);
+        this.frontService.setAuthorizationUser(newUser);
         this.nextPage = true;
         this.authorizationControl.reset();
       }
@@ -69,7 +69,7 @@ export class AuthorizationComponent implements OnInit {
         this.authorizationControl.controls.passw.reset();
       }
       console.log('Ваш пользователь', this.userOnSite);
-      this.FrontService.setAuthorizationUser(this.userOnSite);
+      this.frontService.setAuthorizationUser(this.userOnSite);
       console.log(this.errors);
     }
   }
@@ -81,7 +81,7 @@ export class AuthorizationComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private BackService: BackendService,
-    private FrontService: FrontService
+    private frontService: FrontService
   ) {
     this.authorizationControl = this.formBuilder.group({
       nickname: ['', [Validators.required]],
@@ -105,6 +105,7 @@ export class AuthorizationComponent implements OnInit {
         this.users.push(newUser);
       }
       console.log(this.users);
+      this.frontService.setUsers(this.users);
     });
   }
 }

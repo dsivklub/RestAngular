@@ -1,32 +1,13 @@
+
 <div class="images"  >
-  <!---  <div class="image">
-      <img  class="imageUser" src="assets/fotoProject/foto1.jpg" (click)="enlargedImages($event)" alt="" />
-      <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
-    </div>
-    <div class="image">
-      <img class="imageUser" src="assets/fotoProject/foto2.jpg" (click)="enlargedImages($event)"  alt="" />
-      <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
-    </div>
-    <div class="image">
-      <img class="imageUser" src="assets/fotoProject/foto3.jpg" (click)="enlargedImages($event)" alt="" />
-      <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
-    </div>
-    <div class="image">
-      <img class="imageUser" src="assets/fotoProject/foto4.jpg" (click)="enlargedImages($event)" alt="" />
-      <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
-    </div>
-    <div class="image">
-      <img class="imageUser" src="assets/fotoProject/foto5.jpg" (click)="enlargedImages($event)" alt="" />
-      <img class="like" (click)="like($event)" src="assets/like.png" alt="" >
-    </div> -->
     <ng-container *ngFor = "let image of imageBack;let i = index">
     <div class="image">
-      <img  class="imageUser" [src] = 'image.src' (click) = "enlargedImages($event)" alt="" />
+      <img  class="imageUser" [src] = 'image.src' (click) = "enlargedImages(foto); informationAboutErnlargeImage(foto)" alt=""  #foto/>
       <ng-container *ngIf = "imageLikeAuthorizateUser[i] === 0">
-        <img class="like" (click)="like($event , i)" src="assets/like.png" alt="" >
+        <img class="like" (click)="like(like , i)" src="assets/likes.png" alt="" #like1>
       </ng-container>
     <ng-container *ngIf = "imageLikeAuthorizateUser[i] === 1">
-      <img class="like" (click)="like($event , i)" src="assets/likeKr.png" alt="" >
+      <img class="like" (click)="like(like , i)" src="assets/likeKr.png" alt="" #like2>
     </ng-container>
     </div>
   </ng-container>
@@ -42,8 +23,15 @@
           <span class="close" (click)="invertEnlargeVision()">&times;</span>
         <div class="popup-body">
           <div>
-            <img class = "enrlargedImage" [src]="enrlargedImage" alt="">
-          </div>
+            <img class = "enrlargedImage" [src]="enrlargedImage" alt="" #foto>
+            <span class = "informationAboutEnlargeVision">
+             <!----   <ng-container *ngIf = "informationAboutErnlageImage">
+                  {{informationAboutErnlageImage.src}}
+                </ng-container> -->
+              <span class = "userNickname">Автор: {{user.nickname}}</span><span class = "numberOfLikes">{{informationAboutLikes}}
+              </span>
+              <img class="likeEnlargeVision" src="assets/likeKr.png" alt="" >
+            </span>
         </div>
       </div>
     </div>

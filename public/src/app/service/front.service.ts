@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {User , UsersGroupFromBack, UserLikes, ImageBack} from '../api';
+import {User , UsersGroupFromBack, UserLikes, ImageBack, ImageBackLikes} from '../api';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from './backend.service';
 
@@ -25,9 +25,14 @@ export class FrontService {
     id: 'default',
     likes: []
   };
-  userImage: Array<String> = [];
+  users: Array<UserOnSite> = [];
+  userImage: Array<string> = [];
   newImages = true;
   images: Array<ImageBack> = [];
+  numberPhotos = 0;
+  firstLoad: true;
+  informationAboutErnlageImage: ImageBack;
+  informationAboutImageLikes: Array<ImageBackLikes>;
   constructor(private http: HttpClient,  private backService: BackendService) { }
   setAuthorizationUser(user: UserOnSite) {
     this.user = user;
@@ -58,5 +63,32 @@ export class FrontService {
         }
       }
     });
+  }
+  setInformationAboutErnlageImage(src: string) {
+    this.backService.getImage().subscribe((images:Array<ImageBack>) => {
+      for (let i = 0 ; i < images.length ; i++){
+        console.log('&' , src.split('http://localhost:4200/', 2)[1]);
+        if(images[i].src === src.split('http://localhost:4200/', 2)[1]){
+        this.informationAboutErnlageImage = images[i];
+        console.log('Открыли' , this.informationAboutErnlageImage);
+        }
+      }
+    });
+  }
+  getInformationAboutErnlageImage() {
+    console.log('при срабатывании геттера', this.informationAboutErnlageImage);
+    return this.informationAboutErnlageImage;
+  }
+  setUsers(users: Array<UserOnSite>) {
+    this.users = users;
+  }
+  getUsers() {
+    return this.users;
+  }
+  setInformationAboutImageLikes(likes: Array<ImageBackLikes>)  {
+    this.informationAboutImageLikes = likes;
+  }
+  getInformationAboutImageLikes() {
+    return this.informationAboutImageLikes;
   }
 }

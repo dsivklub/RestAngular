@@ -12,7 +12,7 @@ export interface UsersGroupFromBack {
 }
 
 export interface ImageBack {
-  id_foto: string;
+  idFoto: string;
   src: string;
   id: string;
 }
@@ -20,4 +20,14 @@ export interface ImageBack {
 export interface UserLikes {
   id: string;
   likes: Array<number>;
+}
+
+export interface UserLikeFromBack {
+  id: string,
+  saveFoto: string
+}
+
+export interface ImageBackLikes {
+  idFoto: number,
+  numberLikes: number
 }
