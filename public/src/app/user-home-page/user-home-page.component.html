@@ -5,7 +5,7 @@ rel="stylesheet"
 <div class="userInformation">
   {{authorizateUser.nickname}}
   <!--admin-->
-  <img class = "icons" (click)="invertInformationVision()" src="assets/change1.png" alt="">
+  <img class = "icons" (click)="invertInformationVision()" src="assets/change1.png" alt=""><img>
 </div>
 
 
@@ -82,7 +82,7 @@ rel="stylesheet"
 </form>
   </div>
   <input class = "button" (click)="changeUserInformation()" type="button" value="Изменить">
-  <input type="button" value="Удалить" class = "button" id = "delete" (click)="invertPopupVisionDelete()">
+  <input type="button" value="Удалить" class = "button" id = "delete" (click)="invertInformationVisionDelete()">
 </div>
 </div>
 
@@ -107,6 +107,8 @@ rel="stylesheet"
       </div>
       </div>
 
+
+
   <!--Сделать попап для удаления пользователя-->
 <!----
   <div class="popupDelete" [ngClass]="{
@@ -128,3 +130,21 @@ rel="stylesheet"
         </div>
         </div>
       -->
+
+  <!-------------------------------------------------------------------->
+
+  <div
+[ngClass]="{
+  popup: !informationVisionDelete,
+  vision_on: informationVisionDelete
+}"
+>
+<div class="popup-contentDelete">
+    <span class="close" (click)="invertInformationVisionDelete()">&times;</span>
+  <div class="popup-body">
+    Вы действительно хотите удалить пользователя?
+  </div>
+  <input class = "buttonDelete" (click)="deleteUser()" type="button" value="Да">
+  <input type="button" value="Нет" class = "buttonDelete" id = "deleteNo" (click)="invertInformationVisionDelete()">
+</div>
+</div>

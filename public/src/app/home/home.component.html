@@ -1,4 +1,7 @@
-
+<link
+href="https://fonts.googleapis.com/css?family=Lato&display=swap"
+rel="stylesheet"
+/>
 <div class="images"  >
     <ng-container *ngFor = "let image of imageBack;let i = index">
     <div class="image">
@@ -28,7 +31,7 @@
              <!----   <ng-container *ngIf = "informationAboutErnlageImage">
                   {{informationAboutErnlageImage.src}}
                 </ng-container> -->
-              <span class = "userNickname">Автор: {{user.nickname}}</span><span class = "numberOfLikes">{{informationAboutLikes}}
+              <span class = "userNickname">{{user.nickname}}</span><span class = "numberOfLikes">{{informationAboutLikes}}
               </span>
               <img class="likeEnlargeVision" src="assets/likeKr.png" alt="" >
             </span>

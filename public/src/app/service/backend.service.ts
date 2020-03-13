@@ -56,7 +56,8 @@ export class BackendService {
     return this.http.get('http://localhost:8080/imagelikes');
   }
   setInformationAboutImageLikes(body: ImageBackLikes) {
-    let id = body.idFoto;
+    const id = body.idFoto;
+    //
     return this.http.put('http://localhost:8080/imagelikes' + '/' + id , body).subscribe();
   }
 }

@@ -25,6 +25,7 @@ export class UserHomePageComponent implements OnInit {
   authorizateUser: User;
   popupVisionError = false;
   popupVisionDelete = true;
+  informationVisionDelete = false;
   userImage: Array<String> = [];
   imageLikeAuthorizateUser: Array<number> = [];
   constructor(private formBuilder: FormBuilder , private frontService: FrontService , private backService: BackendService) {
@@ -56,8 +57,8 @@ export class UserHomePageComponent implements OnInit {
   invertPopupError() {
     this.popupVisionError = !this.popupVisionError;
   }
-  invertPopupVisionDelete() {
-    this.popupVisionDelete = !this.popupVisionDelete;
+  invertInformationVisionDelete() {
+    this.informationVisionDelete = !this.informationVisionDelete;
   }
   ngOnInit(): void {
     this.authorizateUser = this.frontService.getAuthorizationUser();

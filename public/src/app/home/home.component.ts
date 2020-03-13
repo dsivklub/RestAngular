@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FrontService } from '../service/front.service';
 import {   UserLikes, ImageBack, UserLikeFromBack, ImageBackLikes } from '../api';
 import { BackendService } from '../service/backend.service';
-import { HtmlTagDefinition } from '@angular/compiler';
+import { HtmlTagDefinition, TagContentType } from '@angular/compiler';
 
 interface User {
   id: string;
@@ -33,10 +33,11 @@ export class HomeComponent implements OnInit {
     private frontService: FrontService,
     private backService: BackendService
   ) {}
-  like(foto, n: number) {
+  like( foto, n: number) {
     if (this.imageLikeAuthorizateUser[n] === 0) {
-      // $event.target.src = 'assets/likeKr.png';
-      // console.log(mod);
+      // n + это фактичеки idFoto, дальше нужно раюотать с ним!
+      console.log('!!!!!это н',  n);
+      console.log('foto', foto);
       foto.src = 'assets/likeKr.png';
       this.imageLikeAuthorizateUser[n] = 1;
       const user = this.frontService.getAuthorizationUser();
@@ -50,15 +51,26 @@ export class HomeComponent implements OnInit {
       this.backService.setUserLikes({
         id: this.frontService.getAuthorizationUser().id,
         saveFoto: this.toBackStandart(this.imageLikeAuthorizateUser)});
-      this.backService.setInformationAboutImageLikes({
-        idFoto: n + 1,
-        numberLikes: (+this.frontService.getInformationAboutImageLikes()[n].numberLikes + 1)
-      });
-      this.frontService.informationAboutImageLikes[n] = {
-        idFoto: n,
-        numberLikes: this.frontService.informationAboutImageLikes[n].numberLikes + 1
-      };
-      //this.informationAboutLikes = this.frontService.getInformationAboutImageLikes()[n].numberLikes;
+
+   //   this.frontService.informationAboutImageLikes[n] = {
+   //     idFoto: n,
+  //     numberLikes: this.frontService.informationAboutImageLikes[n].numberLikes + 1
+  //    };
+
+      for (let i = 0; i < this.frontService.informationAboutImageLikes.length ; i ++) {
+        if (+this.frontService.informationAboutImageLikes[i].idFoto === n + 1) {
+          console.log('прибавляем к', this.imageBack[i].idFoto);
+
+          this.backService.setInformationAboutImageLikes({
+            idFoto: (n + 1),
+            numberLikes: (+this.frontService.informationAboutImageLikes[i].numberLikes + 1)
+          });
+          this.frontService.informationAboutImageLikes[i].numberLikes = this.frontService.informationAboutImageLikes[i].numberLikes + 1;
+          break;
+        }
+      }
+      this.imageLikeAuthorizateUser[n] = 1;
+      console.log('все лайки на фронте', this.frontService.informationAboutImageLikes);
     } else {
       // $event.target.src = 'assets/like.png';
       foto.src = 'assets/likes.png';
@@ -73,15 +85,28 @@ export class HomeComponent implements OnInit {
       this.backService.setUserLikes({
         id: this.frontService.getAuthorizationUser().id,
         saveFoto: this.toBackStandart(this.imageLikeAuthorizateUser)});
-      this.backService.setInformationAboutImageLikes({
+   /*   this.backService.setInformationAboutImageLikes({
           idFoto: n + 1,
-          numberLikes: (+this.frontService.getInformationAboutImageLikes()[n].numberLikes - 1)
+          numberLikes: (+this.frontService.informationAboutImageLikes[n].numberLikes - 1)
+        }); */
+     // this.frontService.informationAboutImageLikes[n] = {
+     //     idFoto: n,
+     //     numberLikes: this.frontService.informationAboutImageLikes[n].numberLikes - 1
+     //   };
+      for (let i = 0; i < this.frontService.informationAboutImageLikes.length ; i ++) {
+      if (+this.frontService.informationAboutImageLikes[i].idFoto === n + 1) {
+        this.backService.setInformationAboutImageLikes({
+          idFoto: (n + 1),
+          numberLikes: (+this.frontService.informationAboutImageLikes[i].numberLikes - 1)
         });
-      this.frontService.informationAboutImageLikes[n] = {
-          idFoto: n,
-          numberLikes: this.frontService.informationAboutImageLikes[n].numberLikes - 1
-        };
-      //this.informationAboutLikes = this.frontService.getInformationAboutImageLikes()[n].numberLikes;
+        this.frontService.informationAboutImageLikes[i].numberLikes = this.frontService.informationAboutImageLikes[i].numberLikes - 1;
+        break;
+      }
+    }
+     //   this.frontService.informationAboutImageLikes[n].numberLikes = this.frontService.informationAboutImageLikes[n].numberLikes - 1;
+        this.imageLikeAuthorizateUser[n] = 0;
+        console.log('все лайки на фронте', this.frontService.informationAboutImageLikes);
+        console.log('Отправилось' , this.frontService.informationAboutImageLikes[n].numberLikes);
     }
   }
 
@@ -109,6 +134,10 @@ export class HomeComponent implements OnInit {
   }
 
   enlargedImages(foto) {
+    this.backService.getInformationAboutImageLikes().subscribe((likes: Array<ImageBackLikes>) => {
+      this.frontService.informationAboutImageLikes = likes;
+      console.log('sssss1' , this.frontService.informationAboutImageLikes);
+    });
     console.log(foto.src);
     this.enrlargedImage = foto.src.split('http://localhost:4200/', 2 )[1];
     console.log(this.enrlargedImage);
@@ -123,15 +152,27 @@ export class HomeComponent implements OnInit {
         this.informationAboutErnlageImage = images[i];
         console.log('Открыли' , this.informationAboutErnlageImage);
         }
-        for(let i = 0 ; i < images.length ; i++) {
-          console.log(this.informationAboutErnlageImage.idFoto);
-          console.log(this.frontService.informationAboutImageLikes[i].idFoto.toString());
-          if (+this.informationAboutErnlageImage.idFoto === this.frontService.informationAboutImageLikes[i].idFoto){
-            this.informationAboutLikes = this.frontService.getInformationAboutImageLikes()[i].numberLikes;
-            console.log('BIL TYT');
-          }
-        }
+
       }
+      for (let i = 0 ; i < images.length ; i++) {
+        // console.log(this.informationAboutErnlageImage.idFoto);
+        // console.log(this.frontService.informationAboutImageLikes[i].idFoto.toString());
+        if (this.enrlargedImage === this.frontService.images[i].src){
+         let idFoto = this.frontService.images[i].idFoto;
+         console.log('//////' , idFoto );
+         console.log(this.frontService.informationAboutImageLikes.length);
+         for (let j = 0 ; j < this.frontService.informationAboutImageLikes.length ; j++) {
+           console.log('$$$$$' , this.frontService.informationAboutImageLikes[j].idFoto);
+               if (this.frontService.informationAboutImageLikes[j].idFoto === +idFoto) {
+                 this.informationAboutLikes = this.frontService.informationAboutImageLikes[j].numberLikes;
+                 console.log('LIKES' , this.informationAboutLikes);
+               }
+           }
+         //this.informationAboutLikes
+          // this.informationAboutLikes = this.frontService.getInformationAboutImageLikes()[i].numberLikes;
+       // console.log('BIL TYT');
+        }
+       }
       for (let i = 0 ; i < this.frontService.getUsers().length ; i++) {
         if (this.frontService.getUsers()[i].id === this.informationAboutErnlageImage.id) {
             this.user = this.frontService.getUsers()[i];
@@ -178,10 +219,11 @@ export class HomeComponent implements OnInit {
      }
     }
    });
+   this.backService.getInformationAboutImageLikes().subscribe((likes: Array<ImageBackLikes>) => {
+    this.frontService.informationAboutImageLikes = likes;
+    console.log('sssss1' , this.frontService.informationAboutImageLikes);
+  });
 
-    this.backService.getInformationAboutImageLikes().subscribe((likes: Array<ImageBackLikes>) => {
-      this.frontService.setInformationAboutImageLikes(likes);
-      console.log('sssss1' , likes);
-   });
 }
+
 }
