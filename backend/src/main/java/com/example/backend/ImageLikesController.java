@@ -1,15 +1,11 @@
 package com.example.backend;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
-import com.example.backend.domain.Image;
+import java.util.List;
+
+
 import com.example.backend.domain.ImageLikes;
 import com.example.backend.repo.ImageLikesRepo;
-import com.example.backend.repo.ImageRepo;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,13 +40,7 @@ public class ImageLikesController {
         return imageLikes;
     }
 
-    /*
-     * @GetMapping("{nickname}") public Map<String, T>
-     * getUserByNickname(@PathVariable String nickname) { return users.stream()
-     * .filter(user -> ((List<Map<String, T>>) user.get("users")).get(1)
-     * .equals(nickname)) .findFirst() .orElseThrow(NotFoundException::new); }
-     */
-
+    
     @PostMapping
     public ImageLikes create(@RequestBody ImageLikes imageLikes) {
         return imageLikesRepo.save(imageLikes);

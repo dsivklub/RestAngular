@@ -5,11 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.ToString;
 
 @Entity
 @Table(name = "users")
-@ToString(of = {"id" , "name" , "surname" ,  "email", "nickname" , "passw"})
+// @ToString(of = {"id" , "name" , "surname" ,  "email", "nickname" , "passw"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

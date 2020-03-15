@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User, UserLikes, UserLikeFromBack, ImageBackLikes } from '../api';
+import { User, UserLikes, UserLikeFromBack, ImageBackLikes, InformationUser } from '../api';
 
 
 interface UserFromBack {
@@ -57,7 +57,15 @@ export class BackendService {
   }
   setInformationAboutImageLikes(body: ImageBackLikes) {
     const id = body.idFoto;
-    //
     return this.http.put('http://localhost:8080/imagelikes' + '/' + id , body).subscribe();
+  }
+  getAvatarUser(id: string) {
+    return this.http.get('http://localhost:8080/usersAvatars' + '/' + id);
+  }
+  getInformationUser(id: string) {
+    return this.http.get('http://localhost:8080/usersInformation' + '/' + id);
+  }
+  setInformationUser(id: string , body: InformationUser) {
+    return this.http.put('http://localhost:8080/usersInformation' + '/' + id , body);
   }
 }

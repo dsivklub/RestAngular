@@ -3,9 +3,8 @@ package com.example.backend;
 
 import java.util.List;
 
-
-import com.example.backend.domain.Image;
-import com.example.backend.repo.ImageRepo;
+import com.example.backend.domain.Avatar;
+import com.example.backend.repo.AvatarRepo;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,41 +19,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("image")
+@RequestMapping("usersAvatars")
 @CrossOrigin(origins = "http://localhost:4200")
-public class ImageController {
-    private final ImageRepo imageRepo;
+public class AvatarController {
+    private final AvatarRepo avatarRepo;
 
     @Autowired
-    public ImageController(ImageRepo imageRepo) {
-        this.imageRepo = imageRepo;
+    public AvatarController(AvatarRepo avatarRepo) {
+        this.avatarRepo = avatarRepo;
     }
 
     @GetMapping
-    public List<Image> greeting() {
-        return imageRepo.findAll();
+    public List<Avatar> greeting() {
+        return avatarRepo.findAll();
     }
 
     @GetMapping("{id}")
-    public Image getUserById(@PathVariable("id") Image image) {
-        return image;
+    public Avatar getUserById(@PathVariable("id") Avatar avatar) {
+        return avatar;
     }
 
     @PostMapping
-    public Image create(@RequestBody Image image) {
-        return imageRepo.save(image);
+    public Avatar create(@RequestBody Avatar avatar) {
+        return avatarRepo.save(avatar);
     }
 
     @PutMapping("{id}")
-    public Image update(
-        @PathVariable("id") Image imageFromDb, 
-        @RequestBody Image image) {
-        BeanUtils.copyProperties(image, imageFromDb, "id");
-        return imageRepo.save(image);
+    public Avatar update(
+        @PathVariable("id") Avatar avatarFromDb, 
+        @RequestBody Avatar avatar) {
+        BeanUtils.copyProperties(avatar, avatarFromDb, "id");
+        return avatarRepo.save(avatar);
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable("id") Image image) {
-        imageRepo.delete(image);
+    public void delete(@PathVariable("id") Avatar avatar) {
+        avatarRepo.delete(avatar);
     }
 }

@@ -23,11 +23,22 @@ export interface UserLikes {
 }
 
 export interface UserLikeFromBack {
-  id: string,
-  saveFoto: string
+  id: string;
+  saveFoto: string;
 }
 
 export interface ImageBackLikes {
-  idFoto: number,
-  numberLikes: number
+  idFoto: number;
+  numberLikes: number;
+}
+
+export interface AvatarUser {
+  id: string;
+  avatar: string;
+}
+
+export interface InformationUser {
+  id: string;
+  userFotoInformation: string;
+  userInformation: string;
 }

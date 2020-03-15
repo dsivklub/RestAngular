@@ -1,11 +1,11 @@
 import { Component, OnInit} from '@angular/core';
 import { FrontService } from '../service/front.service';
-import {   UserLikes, ImageBack } from '../api';
+import {   UserLikes, ImageBack, AvatarUser, InformationUser } from '../api';
 import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
 import { BackendService } from '../service/backend.service';
 
 interface User {
-  id: string,
+  id: string;
   name: string;
   surname: string;
   email: string;
@@ -28,6 +28,10 @@ export class UserHomePageComponent implements OnInit {
   informationVisionDelete = false;
   userImage: Array<String> = [];
   imageLikeAuthorizateUser: Array<number> = [];
+  userAvatar: string;
+  visionInformation = false;
+  contentUserInterests1: string;
+  contentUserInterests2: string;
   constructor(private formBuilder: FormBuilder , private frontService: FrontService , private backService: BackendService) {
 
    }
@@ -60,6 +64,20 @@ export class UserHomePageComponent implements OnInit {
   invertInformationVisionDelete() {
     this.informationVisionDelete = !this.informationVisionDelete;
   }
+  invertInformationVision() {
+    this.informationVision = !this.informationVision;
+  }
+invertVisionInformation() {
+  this.visionInformation = !this.visionInformation;
+}
+  sendInformation() {
+    const information: InformationUser =  {
+      id: this.authorizateUser.id,
+      userFotoInformation: this.contentUserInterests1,
+      userInformation: this.contentUserInterests2
+    };
+    this.backService.setInformationUser(this.frontService.getAuthorizationUser().id , information);
+  }
   ngOnInit(): void {
     this.authorizateUser = this.frontService.getAuthorizationUser();
     console.log(this.userImage);
@@ -73,6 +91,16 @@ export class UserHomePageComponent implements OnInit {
     this.userImage = this.frontService.getUserImage();
     const like: UserLikes = this.frontService.getUserLike();
     this.imageLikeAuthorizateUser = like.likes;
+    this.backService.getAvatarUser(this.frontService.getAuthorizationUser().id).subscribe(
+      (avatar: AvatarUser) => {
+        this.userAvatar = avatar.avatar;
+      });
+    this.backService.getInformationUser(this.frontService.getAuthorizationUser().id).subscribe(
+        (information: InformationUser) => {
+          this.contentUserInterests1 = information.userFotoInformation;
+          this.contentUserInterests2 = information.userInformation;
+        }
+        );
 /*
 this.informationUser = this.formBuilder.group({
   name : ['' , [Validators.required]] ,
@@ -83,9 +111,7 @@ this.informationUser = this.formBuilder.group({
 } , {validator: GroupAddValidator});
 */
 }
-invertInformationVision() {
-    this.informationVision = !this.informationVision;
-  }
+
 }
 
 function GroupAddValidator(control: FormGroup): ValidationErrors|void {

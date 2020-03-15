@@ -12,7 +12,7 @@ export class HomepageComponent implements OnInit {
   user: User;
   userName: string;
   counter = 1;
-  constructor(private FrontService: FrontService , private backend: BackendService ) { }
+  constructor(private frontService: FrontService , private backend: BackendService ) { }
   translate() {
     const visionArea = document.getElementsByClassName("visual-area") as  HTMLCollectionOf < HTMLElement >;
     const information = document.getElementsByClassName("information") as  HTMLCollectionOf < HTMLElement >;
@@ -25,9 +25,6 @@ export class HomepageComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-  // this.user = this.FrontService.getAuthorizationUser();
-  // this.userName = this.user.name;
-  // this.backend.getImage().subscribe((data) => console.log(data));
   }
 
 }

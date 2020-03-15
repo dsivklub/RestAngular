@@ -1,0 +1,150 @@
+CREATE DATABASE photogallery
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Russian_Russia.1251'
+    LC_CTYPE = 'Russian_Russia.1251'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+
+
+CREATE TABLE public.users
+(
+    id bigint NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+    name text COLLATE pg_catalog."default" NOT NULL,
+    surname text COLLATE pg_catalog."default" NOT NULL,
+    email text COLLATE pg_catalog."default" NOT NULL,
+    nickname text COLLATE pg_catalog."default" NOT NULL,
+    passw text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT users_pkey PRIMARY KEY (id)
+)
+
+INSERT INTO public.users(
+	id, name, surname, email, nickname, passw)
+	VALUES (1, 'Ilya', 'Pavlovskiy', 'pavl@gmail.com', 'admin', '123456');
+
+INSERT INTO public.users(
+	id, name, surname, email, nickname, passw)
+	VALUES (2, 'Stas', 'Baranov', 'baranov@gmail.com', 'stas', '1234567');
+
+INSERT INTO public.users(
+	id, name, surname, email, nickname, passw)
+	VALUES (3, 'Vova', 'Fomin', 'fomin@gmail.com', 'vova', '12345678');
+
+
+CREATE TABLE public.user_save_foto
+(
+    id bigint NOT NULL DEFAULT nextval('user_save_foto_id_seq'::regclass),
+    save_foto text COLLATE pg_catalog."default",
+    CONSTRAINT user_save_foto_pkey PRIMARY KEY (id)
+)
+
+INSERT INTO public.user_save_foto(
+	id, save_foto)
+	VALUES (1, '0,0,0,0,0');
+
+INSERT INTO public.user_save_foto(
+	id, save_foto)
+	VALUES (2, '0,0,0,0,0');
+
+INSERT INTO public.user_save_foto(
+	id, save_foto)
+	VALUES (3, '0,0,0,0,0');
+
+CREATE TABLE public.foto_likes
+(
+    id_foto bigint NOT NULL DEFAULT nextval('foto_likes_id_foto_seq'::regclass),
+    number_likes integer NOT NULL,
+    CONSTRAINT foto_likes_pkey PRIMARY KEY (id_foto)
+)
+
+INSERT INTO public.foto_likes(
+	id_foto, number_likes)
+	VALUES (1, 0);
+
+INSERT INTO public.foto_likes(
+	id_foto, number_likes)
+	VALUES (2, 0);
+
+INSERT INTO public.foto_likes(
+	id_foto, number_likes)
+	VALUES (3, 0);
+
+INSERT INTO public.foto_likes(
+	id_foto, number_likes)
+	VALUES (4, 0);
+
+INSERT INTO public.foto_likes(
+	id_foto, number_likes)
+	VALUES (5, 0);
+
+CREATE TABLE public.foto
+(
+    id_foto bigint NOT NULL DEFAULT nextval('foto_id_foto_seq'::regclass),
+    src text COLLATE pg_catalog."default" NOT NULL,
+    id integer NOT NULL,
+    CONSTRAINT foto_pkey PRIMARY KEY (id_foto)
+)
+
+
+INSERT INTO public.foto(
+	id_foto, src, id)
+	VALUES (1, 'assets/fotoProject/foto1.jpg', 1);
+
+INSERT INTO public.foto(
+	id_foto, src, id)
+	VALUES (2, 'assets/fotoProject/foto2.jpg', 1);
+
+INSERT INTO public.foto(
+	id_foto, src, id)
+	VALUES (3, 'assets/fotoProject/foto3.jpg', 2);
+
+INSERT INTO public.foto(
+	id_foto, src, id)
+	VALUES (4, 'assets/fotoProject/foto4.jpg', 2);
+
+INSERT INTO public.foto(
+	id_foto, src, id)
+	VALUES (5, 'assets/fotoProject/foto5.jpg', 3);
+
+
+CREATE TABLE public.avatars
+(
+    id bigint NOT NULL DEFAULT nextval('avatars_id_seq'::regclass),
+    avatar text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT avatars_pkey PRIMARY KEY (id)
+)
+
+INSERT INTO public.avatars(
+	id, avatar)
+	VALUES (1, 'assets/defaultAvatarUser.png');
+
+INSERT INTO public.avatars(
+	id, avatar)
+	VALUES (2, 'assets/defaultAvatarUser.png');
+
+INSERT INTO public.avatars(
+	id, avatar)
+	VALUES (3, 'assets/defaultAvatarUser.png');
+
+
+CREATE TABLE public.additional_information
+(
+    id bigint NOT NULL DEFAULT nextval('additional_information_id_seq'::regclass),
+    user_foto_info text COLLATE pg_catalog."default",
+    user_info text COLLATE pg_catalog."default",
+    CONSTRAINT additional_information_pkey PRIMARY KEY (id)
+)
+
+INSERT INTO public.additional_information(
+	id, user_foto_info, user_info)
+	VALUES (1, 'Люблю фотографировать природу, занимаюсь фото 2 года', 'Занимаюсь боксом с 14 лет');
+
+
+INSERT INTO public.additional_information(
+	id, user_foto_info, user_info)
+	VALUES (2, 'Люблю фотографировать людей');
+
+INSERT INTO public.additional_information(
+	id, user_foto_info, user_info)
+	VALUES (1, 'Люблю природу', 'Занимаюсь велоспортом');

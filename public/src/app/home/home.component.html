@@ -10,7 +10,7 @@ rel="stylesheet"
         <img class="like" (click)="like(like , i)" src="assets/likes.png" alt="" #like1>
       </ng-container>
     <ng-container *ngIf = "imageLikeAuthorizateUser[i] === 1">
-      <img class="like" (click)="like(like , i)" src="assets/likeKr.png" alt="" #like2>
+      <img class="like" (click)="like(like , i)" src="assets/newLike.png" alt="" #like2>
     </ng-container>
     </div>
   </ng-container>
@@ -28,11 +28,8 @@ rel="stylesheet"
           <div>
             <img class = "enrlargedImage" [src]="enrlargedImage" alt="" #foto>
             <span class = "informationAboutEnlargeVision">
-             <!----   <ng-container *ngIf = "informationAboutErnlageImage">
-                  {{informationAboutErnlageImage.src}}
-                </ng-container> -->
-              <span class = "userNickname">{{user.nickname}}</span><span class = "numberOfLikes">{{informationAboutLikes}}
-              </span>
+              <span class = "userNickname" (click)="anotherUserInformation()" routerLink = "//userpage/anotherUser">{{user.nickname}}</span>
+              <span class = "numberOfLikes">{{informationAboutLikes}}</span>
               <img class="likeEnlargeVision" src="assets/likeKr.png" alt="" >
             </span>
         </div>

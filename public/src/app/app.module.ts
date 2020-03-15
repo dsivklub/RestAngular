@@ -15,16 +15,19 @@ import { UserGuard } from './user-page.guard';
 import { UserHomePageComponent } from './user-home-page/user-home-page.component';
 import { SaveUserImagesComponent } from './save-user-images/save-user-images.component';
 import { HomeComponent } from './home/home.component';
+import { AnotherUserComponent } from './another-user/another-user.component';
 
 const routes = [
   {path: '' , component: HomepageComponent } ,
   {path: 'registration' , component: RegistrationComponent},
   {path: 'authorization', component: AuthorizationComponent},
-  {path: 'userpage' , component: UserPageComponent, canActivate: [UserGuard]  , children : [
-    {path: 'home' , component: HomeComponent },
+  {path: 'userpage' , component: UserPageComponent  , children : [
+    {path: 'home' , component: HomeComponent},
     {path: 'yourPage' , component: UserHomePageComponent},
-    {path: 'saveImages', component: SaveUserImagesComponent}
-  ]}
+    {path: 'saveImages', component: SaveUserImagesComponent},
+    {path: 'anotherUser' , component: AnotherUserComponent}
+  ]},
+
 ];
 
 @NgModule({
@@ -36,7 +39,8 @@ const routes = [
     UserPageComponent,
     UserHomePageComponent,
     SaveUserImagesComponent,
-    HomeComponent
+    HomeComponent,
+    AnotherUserComponent
   ],
   imports: [
     BrowserModule,

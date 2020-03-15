@@ -16,8 +16,6 @@ interface UserOnSite {
   providedIn: 'root'
 })
 
-
-
 export class FrontService {
   autorizate: boolean;
   user: UserOnSite;
@@ -33,6 +31,7 @@ export class FrontService {
   firstLoad: true;
   informationAboutErnlageImage: ImageBack;
   informationAboutImageLikes: Array<ImageBackLikes>;
+  anotherUserId: string;
   constructor(private http: HttpClient,  private backService: BackendService) { }
   setAuthorizationUser(user: UserOnSite) {
     this.user = user;
@@ -90,5 +89,11 @@ export class FrontService {
   }
   getInformationAboutImageLikes() {
     return this.informationAboutImageLikes;
+  }
+  getAnotherUserId() {
+    return this.anotherUserId;
+  }
+  setAnotherUserId(id: string) {
+    this.anotherUserId = id;
   }
 }

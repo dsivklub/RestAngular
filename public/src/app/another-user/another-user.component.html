@@ -1,0 +1,49 @@
+
+<link
+href="https://fonts.googleapis.com/css?family=Lato&display=swap"
+rel="stylesheet"
+/>
+<div class="userInformation">
+  <!--{{authorizateUser.nickname}}-->
+  <img class = "avatar" src="assets/defaultAvatarUser.png" alt="">
+ <span class = "nickname">admin</span>
+</div>
+  <img class = "iconInformation" src="assets/informationAboutUserPhoto.png" (click)="invertVisionInformation()" alt="">
+
+<!--------------------------------------------------------------------->
+<div class="images"  >
+  <ng-container *ngFor = "let image of userImage;let i = index">
+  <div class="image">
+    <img class="imageUser" [src] = 'userImage[i].src'  alt="" />
+    <ng-container *ngIf = "imageLikeAuthorizateUser[userImage[i].idFoto ] === 0 ">
+      <img class="like"  src="assets/likes.png" alt="" >
+    </ng-container>
+  <ng-container *ngIf = "imageLikeAuthorizateUser[userImage[i].idFoto] === 1">
+    <img class="like"  src="assets/newLike.png" alt="" >
+  </ng-container>
+  </div>
+</ng-container>
+</div>
+
+<!--------------------------------------------------------------------------->
+
+<div
+[ngClass]="{
+  popup: !visionInformation,
+  vision_on: visionInformation
+}"
+>
+<div class="popup-contentInformation">
+    <span class="close" (click)="invertVisionInformation()" >&times;</span>
+  <div class="popup-body">
+    <div class = "userInterests">
+    <span class = "userInterests" >Интересы как фотографа: </span>
+    <textarea id='interest1' class = "inputInterests" [(ngModel)] = "contentUserInterests1"></textarea>
+    </div>
+    <div class = "userInterests">
+      <span class = "userInterests">Интересы помимо фотографии:  </span>
+      <textarea class = "inputInterests" [(ngModel)] = "contentUserInterests2"></textarea>
+      </div>
+  </div>
+</div>
+</div>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BackendService } from '../service/backend.service';
-// import {User , UsersGroupFromBack} from '../api';
 import { FrontService } from '../service/front.service';
 
 interface User {

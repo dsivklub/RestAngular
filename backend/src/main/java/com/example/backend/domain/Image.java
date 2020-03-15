@@ -1,11 +1,9 @@
 package com.example.backend.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 
@@ -14,7 +12,7 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "foto")
-@ToString(of = {"id_foto" , "src" , "id"})
+// @ToString(of = {"id_foto" , "src" , "id"})
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
