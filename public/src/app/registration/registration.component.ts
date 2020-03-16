@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators, FormArray, ValidationErrors} from '@angular/forms';
-import {User , UsersGroupFromBack} from '../api';
+import {User , UsersGroupFromBack, AvatarUser} from '../api';
 import { BackendService } from '../service/backend.service';
 
 @Component({
@@ -31,6 +31,9 @@ export class RegistrationComponent implements OnInit {
     };
     this.users.push(newUser);
     this.backService.setUser(newUser).subscribe();
+    this.backService.setDefaultAvatarUser().subscribe();
+    this.backService.setDefaultSaveFoto().subscribe();
+    this.backService.setDefaultInformationUser().subscribe();
     this.registrationControl.reset();
     console.log(this.users);
   } else {

@@ -21,7 +21,7 @@ const routes = [
   {path: '' , component: HomepageComponent } ,
   {path: 'registration' , component: RegistrationComponent},
   {path: 'authorization', component: AuthorizationComponent},
-  {path: 'userpage' , component: UserPageComponent  , children : [
+  {path: 'userpage' , component: UserPageComponent  , canActivate:[UserGuard] , children : [
     {path: 'home' , component: HomeComponent},
     {path: 'yourPage' , component: UserHomePageComponent},
     {path: 'saveImages', component: SaveUserImagesComponent},

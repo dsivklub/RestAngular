@@ -42,3 +42,8 @@ export interface InformationUser {
   userFotoInformation: string;
   userInformation: string;
 }
+
+export interface InformationUserToBack {
+  userFotoInformation: string;
+  userInformation: string;
+}

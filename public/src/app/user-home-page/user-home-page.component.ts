@@ -94,6 +94,7 @@ invertVisionInformation() {
     this.backService.getAvatarUser(this.frontService.getAuthorizationUser().id).subscribe(
       (avatar: AvatarUser) => {
         this.userAvatar = avatar.avatar;
+        console.log(this.userAvatar);
       });
     this.backService.getInformationUser(this.frontService.getAuthorizationUser().id).subscribe(
         (information: InformationUser) => {

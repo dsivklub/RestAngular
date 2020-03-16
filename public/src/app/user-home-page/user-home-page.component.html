@@ -4,8 +4,8 @@ rel="stylesheet"
 />
 <div class="userInformation">
   <!--{{authorizateUser.nickname}}-->
-  <img class = "avatar" src="assets/defaultAvatarUser.png" alt="">
- <span class = "nickname">admin
+  <img class = "avatar" [src]="userAvatar" alt="">
+ <span class = "nickname">{{authorizateUser.nickname}}
   <img class = "icons" (click)="invertInformationVision()" src="assets/settings.png" alt=""><img>
   <img class = "iconInformation" src="assets/informationAboutUserPhoto.png" (click)="invertVisionInformation()" alt="">
 </span>
@@ -69,7 +69,7 @@ rel="stylesheet"
 </form>
   </div>
   <input class = "button" (click)="changeUserInformation()" type="button" value="Изменить">
-  <input type="button" value="Удалить" class = "button" id = "delete" (click)="invertInformationVisionDelete()">
+  <input type="button" value="Удалить" class = "button" id = "delete" (click)="invertInformationVisionDelete()" routerLink = "//registration">
 </div>
 </div>
 
