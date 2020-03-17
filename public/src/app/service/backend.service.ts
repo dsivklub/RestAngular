@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User, UserLikes, UserLikeFromBack, ImageBackLikes, InformationUser, AvatarUser, InformationUserToBack } from '../api';
-
+import { catchError} from 'rxjs/operators';
+import {Observable, throwError} from 'rxjs';
 
 interface UserFromBack {
   id: string;

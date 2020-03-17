@@ -38,9 +38,13 @@ rel="stylesheet"
   </div>
             <div class="popup-body">
         <div>
-        <div *ngIf = "!registrationControl.valid">
+        <ng-container *ngIf = "registrationControl.invalid">
             {{registrationControl.errors.GroupAddValidator.error1}}
-        </div>
+            <span *ngIf="registrationControl.hasError('email', 'mail')"><br>введена не эл почта<br></span>
+            <span *ngIf="registrationControl.hasError('minlength', 'password')">
+              <br>Введён пароль не валидный пароль, минимальная длина пароля 6
+            </span>
+        </ng-container>
       </div>
       </div>
       </div>
