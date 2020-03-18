@@ -1,0 +1,102 @@
+CREATE DATABASE photogallery
+
+CREATE TABLE users(
+    id serial PRIMARY KEY,
+    name text NOT NULL,
+    surname text NOT NULL,
+    email text NOT NULL,
+    nickname text NOT NULL,
+    password text NOT NULL
+);
+INSERT INTO users(
+	id, name, surname, email, nickname, password)
+	VALUES (1, 'Ilya' , 'Pavlovsky', 'pavl@gmail.com', 'admin', '123456');
+
+INSERT INTO users(
+	id, name, surname, email, nickname, password)
+	VALUES (2, 'Stas' , 'Baranov', 'baranov@gmail.com', 'stas', '1234567');
+
+INSERT INTO users(
+	id, name, surname, email, nickname, password)
+	VALUES (3, 'Vova' , 'Fomin', 'fomin@gmail.com', 'vova', '12345678');
+
+CREATE TABLE user_save_foto(
+    id serial PRIMARY KEY,
+    save_foto text NOT NULL
+); 
+
+INSERT INTO user_save_foto(
+	id, save_foto)
+	VALUES (1, '0,0,0,0,0');
+
+INSERT INTO user_save_foto(
+	id, save_foto)
+	VALUES (2, '0,0,0,0,0');
+
+INSERT INTO user_save_foto(
+	id, save_foto)
+	VALUES (3, '0,0,0,0,0');
+
+
+CREATE TABLE foto_likes(
+    id_foto serial PRIMARY KEY,
+    number_likes INT NOT NULL
+);
+
+INSERT INTO foto_likes(
+	id_foto, number_likes)
+	VALUES (1, 0);
+
+INSERT INTO foto_likes(
+	id_foto, number_likes)
+	VALUES (2, 0);
+
+INSERT INTO foto_likes(
+	id_foto, number_likes)
+	VALUES (3, 0);
+
+INSERT INTO foto_likes(
+	id_foto, number_likes)
+	VALUES (4, 0);
+
+INSERT INTO foto_likes(
+	id_foto, number_likes)
+	VALUES (5, 0);
+
+CREATE TABLE foto(
+    id_foto serial PRIMARY KEY,
+    src text NOT NULL,
+    id INT NOT NULL
+);
+
+INSERT INTO foto(
+	id_foto, src, id)
+	VALUES (1, 'assets/fotoProject/foto1.jpg', 1);
+
+INSERT INTO foto(
+	id_foto, src, id)
+	VALUES (2, 'assets/fotoProject/foto1.jpg', 1);
+
+INSERT INTO foto(
+	id_foto, src, id)
+	VALUES (3, 'assets/fotoProject/foto1.jpg', 2);
+
+INSERT INTO foto(
+	id_foto, src, id)
+	VALUES (4, 'assets/fotoProject/foto1.jpg', 2);
+
+INSERT INTO foto(
+	id_foto, src, id)
+	VALUES (5, 'assets/fotoProject/foto1.jpg', 3);
+
+
+CREATE TABLE avatars(
+    id serial PRIMARY KEY,
+    avatar text
+);
+
+CREATE TABLE additional_information(
+    id serial PRIMARY KEY,
+    user_foto_info text,
+    user_info text
+);
